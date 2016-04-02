@@ -13,8 +13,9 @@ var exphbs = require('express-handlebars');
 var easyimg = require('easyimage');
 var _ = require('lodash');
 var cv = require('opencv');
-
+var unirest = require('unirest');
 var routes = require('./routes/index');
+var math = require('math');
 
 var exts = {
     'image/jpeg': '.jpg',
@@ -29,8 +30,8 @@ var app = express();
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('.hbs', exphbs({extname: '.hbs'}));
+app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -174,7 +175,7 @@ app.post('/search', function (req, res, next) {
         .header("Accept", "application/json")
         .end(function (result) {
             searches = result.body[math.floor(math.random() * result.body.length)].title;
-            req.write(searches);
+            console.log(searches);
         });
 
 });

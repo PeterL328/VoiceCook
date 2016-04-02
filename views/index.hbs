@@ -63,7 +63,7 @@
                 <!-- task notificatoin start -->
                 <li id="task_notificatoin_bar" class="dropdown">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="icon-task-l"></i>
+                            <span class="icon-task-l"></span>
                                 <span class="badge bg-important">5</span>
                     </a>
                     <ul class="dropdown-menu extended tasks-bar">
@@ -384,17 +384,18 @@
     <div>
         <form method="post" action="/upload" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="file" name="file">
+                <!--<input class="inputfile" type="file" name="file" size = "500"/>-->
+                <input class="inputfile" type="submit" value="chicken" class="btn btn-primary" align = "left">
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <input class="button-one" type="submit" value="Submit" class="btn btn-primary" align = "left">
             </div>
         </form>
 
         <form method="post" action="/search" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-primary">
+                <input class="button-two" type="submit" value="Search" class="btn btn-primary" align = "left">
             </div>
         </form>
         <link rel='stylesheet' href='/stylesheets/style.css'/>

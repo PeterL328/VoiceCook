@@ -45,7 +45,7 @@ a {
     height   : 200px;
     left     : 50%;
     top      : 50%;
-    /*margin-left : -10px; !* half of the width  *!*/
+    margin-left : -150px; /* half of the width  */
     margin-top  : -200px; /* half of the height */
     color: #ffffff;
 }
@@ -57,7 +57,16 @@ a {
     height   : 200px;
     left     : 50%;
     top      : 50%;
-    /*margin-left : -10px; !* half of the width  *!*/
+    margin-left : -150px; /*half of the width  */
     margin-top  : 50px; /* half of the height */
     color: #ffffff;
+}
+.inputfile {
+    font-size:  500pt;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+    width    : 200px;
+    height   : 200px;
 }

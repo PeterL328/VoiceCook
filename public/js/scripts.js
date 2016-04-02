@@ -50,9 +50,9 @@ function initializeJS() {
                 jQuery('#container').removeClass('sidebar-close');
                 jQuery('#sidebar > ul').show();
                 jQuery('#sidebar').animate({'margin-left':"0px"}, 500 );
-                jQuery('.button-one').css({'margin-left': '-10px'});
+                jQuery('.button-one').css({'margin-left': '500px'});
                 jQuery('.button-one').css({'margin-top': '-200px'});
-                jQuery('.button-two').css({'margin-left': '-10px'});
+                jQuery('.button-two').css({'margin-left': '500px'});
                 jQuery('.button-two').css({'margin-top': '50px'});
             }
         }
