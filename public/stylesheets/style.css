@@ -1,8 +1,63 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    width: 100%;
+    height: 100%;
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+.slideout-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    width: 256px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+}
+
+.slideout-panel {
+    position: relative;
+    z-index: 1;
+    will-change: transform;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+    overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+    display: block;
+}
+
+.button-one {
+    position : absolute;
+    background: #00a0df;
+    width    : 200px;
+    height   : 200px;
+    left     : 50%;
+    top      : 50%;
+    /*margin-left : -10px; !* half of the width  *!*/
+    margin-top  : -200px; /* half of the height */
+    color: #ffffff;
+}
+
+.button-two {
+    position : absolute;
+    background: #fed189;
+    width    : 200px;
+    height   : 200px;
+    left     : 50%;
+    top      : 50%;
+    /*margin-left : -10px; !* half of the width  *!*/
+    margin-top  : 50px; /* half of the height */
+    color: #ffffff;
 }
