@@ -53,6 +53,7 @@ function initializeJS() {
                 jQuery('.button-one').css({'margin-left': '-10px'});
                 jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').css({'margin-left': '-10px'});
+
                 jQuery('.button-two').css({'margin-top': '50px'});
             }
         }
