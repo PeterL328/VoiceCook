@@ -5,7 +5,9 @@ var router = express.Router();
 
 /* GET food page. */
 router.get('/', function(req, res, next) {
-  res.render('add_ingred', { title: 'Express' });
+  res.render('food', { title: 'Express' });
 });
-
+router.post('/', function(req, res, next) {
+  res.render('food', { title: 'Express' });
+});
 module.exports = router;

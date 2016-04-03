@@ -15,7 +15,7 @@ var _ = require('lodash');
 var cv = require('opencv');
 var unirest = require('unirest');
 var routes = require('./routes/index');
-var foodPage = require('./routes/add_ingred');
+var food = require('./routes/food');
 var math = require('math');
 
 var exts = {
@@ -37,18 +37,20 @@ ingredientString += ingredients[ingredients.length - 1];
 // view engine setup
 app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', 'hbs');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/food', routes);
-app.use('/food', foodPage);
-
+app.post('/food' ,function(req, res, next){
+    console.log("got here");
+    next();
+} );
+app.use('/', routes);
 
 
 /**
