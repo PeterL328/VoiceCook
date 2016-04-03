@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var fs = require('fs');
 var http = require('http');
 var async = require('async');
 var multer = require('multer');
@@ -17,7 +17,7 @@ var unirest = require('unirest');
 var routes = require('./routes/index');
 var food = require('./routes/food');
 var math = require('math');
-
+var Quagga = require('quagga').default;
 var exts = {
     'image/jpeg': '.jpg',
     'image/png': '.png',
@@ -46,98 +46,65 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/food' ,function(req, res, next){
-    console.log("got here");
-    next();
-} );
 app.use('/', routes);
-
+app.post('/food', function (req, res, next) {
+    //console.log("got here1");
+    next();
+}, food);
+app.use('/food', function (req, res, next) {
+    //console.log("got here2");
+    next();
+}, food);
 
 /**
  * POST callback for the file upload form. This is where the magic happens.
  */
 app.post('/upload', upload.single('file'), function (req, res, next) {
-
+    //console.dir(req.file);
+    //console.log(req.file.path);
     // Generate a filename; just use the one generated for us, plus the appropriate extension
     var filename = req.file.filename + exts[req.file.mimetype]
     // and source and destination filepaths
         , src = __dirname + '/' + req.file.path
-        , dst = __dirname + '/public/images/' + filename;
-
-    /**
-     * Go through the various steps
-     */
-    async.waterfall(
-        [
-            function (callback) {
-
-                /**
-                 * Resize the image to a sensible size
-                 */
-                easyimg.resize(
-                    {
-                        width: 960,
-                        src: src,
-                        dst: dst
-                    }
-                ).then(function (image) {
-
-                    return callback();
-
-                });
-
-            },
-            function (callback) {
-
-                /**
-                 * Use OpenCV to read the (resized) image
-                 */
-                cv.readImage(dst, callback);
-
-            },
-            function (im, callback) {
-
-                /**
-                 * Run the face detection algorithm
-                 */
-                im.detectObject(cv.FACE_CASCADE, {}, callback);
-
-            }
-
-        ],
-        function (err, faces) {
-
-            /**
-             * If an error occurred somewhere along the way, render the
-             * error page.
-             */
-            if (err) {
-
-                return res.render(
-                    'error',
-                    {
-                        message: err.message
-                    }
-                );
-            }
-
-            /**
-             * We're all good; render the result page.
-             */
-            return res.render(
-                'result',
-                {
-                    filename: filename,
-                    faces: faces
-                }
-            );
-
+        , dst = __dirname + '/uploads/' + filename;
+    fs.renameSync(src, src + ".jpg");
+    src += '.jpg';
+    console.log(src);
+    Quagga.decodeSingle({
+        src: src,
+        locate: true,
+        numOfWorkers: 0,  // Needs to be 0 when used within node
+        inputStream: {
+            size: 800  // restrict input-size to be 800px in width (long-side)
+        },
+        decoder: {
+            drawBoundingBox: true,
+            showFrequency: false,
+            drawScanline: true,
+            showPattern: false,
+            readers: [
+                'code_128_reader',
+                'ean_reader',
+                'ean_8_reader',
+                'code_39_reader',
+                'code_39_vin_reader',
+                'codabar_reader'
+            ],
+            multiple: true
         }
-    );
-    for(var i =0; i < ingredients.length-1;i++){
+        ,
+    }, function (result) {
+        if (result.codeResult) {
+            console.log("result", result.codeResult.code);
+        } else {
+            console.log("not detected");
+        }
+    });
+
+    for (var i = 0; i < ingredients.length - 1; i++) {
         ingredientString += ingredients[i] + "%2C";
     }
-    ingredientString += ingredients[ingredients.length-1];
+    ingredientString += ingredients[ingredients.length - 1];
 });
 
 app.post('/search', function (req, res, next) {

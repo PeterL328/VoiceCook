@@ -45,6 +45,7 @@ function initializeJS() {
                 jQuery('.button-one').css({'margin-left': '-100px'});
                 jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').css({'margin-left': '-100px'});
+                jQuery('.button-two').css({'margin-top': '20px'});
             }
 
             if (wSize > 768) {
@@ -55,7 +56,7 @@ function initializeJS() {
                 jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').css({'margin-left': '-10px'});
 
-                jQuery('.button-two').css({'margin-top': '50px'});
+                jQuery('.button-two').css({'margin-top': '20px'});
             }
         }
         jQuery(window).on('load', responsiveView);
@@ -71,7 +72,7 @@ function initializeJS() {
                 jQuery('.button-one').animate({'margin-left': '-100px'}, 500);
                 jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').animate({'margin-left': '-100px'}, 500);
-                jQuery('.button-two').css({'margin-top': '50px'});
+                jQuery('.button-two').css({'margin-top': '20px'});
             }
             // jQuery('#sidebar').css({
             //     'margin-left': '-180px'
