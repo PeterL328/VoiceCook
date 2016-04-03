@@ -42,22 +42,30 @@ a {
     position : absolute;
     background: #00a0df;
     width    : 200px;
-    height   : 200px;
+    height   : 100px;
     left     : 50%;
     top      : 50%;
     /*margin-left : -10px; !* half of the width  *!*/
     margin-top  : -200px; /* half of the height */
     color: #ffffff;
+    border-radius: 15%;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
 }
 
 .button-two {
     position : absolute;
     background: #fed189;
     width    : 200px;
-    height   : 200px;
+    height   : 100px;
     left     : 50%;
     top      : 50%;
     /*margin-left : -10px; !* half of the width  *!*/
     margin-top  : 50px; /* half of the height */
     color: #ffffff;
+    border-radius: 15%;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
 }

@@ -51,7 +51,7 @@ function initializeJS() {
                 jQuery('#sidebar > ul').show();
                 jQuery('#sidebar').animate({'margin-left':"0px"}, 500 );
                 jQuery('.button-one').css({'margin-left': '-10px'});
-                jQuery('.button-one').css({'margin-top': '-200px'});
+                jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').css({'margin-left': '-10px'});
                 jQuery('.button-two').css({'margin-top': '50px'});
             }
@@ -67,7 +67,7 @@ function initializeJS() {
             });
             if (jQuery(window).width() > 768) {
                 jQuery('.button-one').animate({'margin-left': '-100px'}, 500);
-                jQuery('.button-one').css({'margin-top': '-200px'});
+                jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').animate({'margin-left': '-100px'}, 500);
                 jQuery('.button-two').css({'margin-top': '50px'});
             }
