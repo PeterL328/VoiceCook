@@ -43,6 +43,7 @@ function initializeJS() {
                 jQuery('#container').addClass('sidebar-close');
                 jQuery('#sidebar > ul').hide();
                 jQuery('.button-one').css({'margin-left': '-100px'});
+                jQuery('.button-one').css({'margin-top': '-100px'});
                 jQuery('.button-two').css({'margin-left': '-100px'});
             }
 

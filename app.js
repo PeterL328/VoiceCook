@@ -15,6 +15,7 @@ var _ = require('lodash');
 var cv = require('opencv');
 var unirest = require('unirest');
 var routes = require('./routes/index');
+var foodPage = require('./routes/add_ingred');
 var math = require('math');
 
 var exts = {
@@ -27,6 +28,10 @@ var ingredients = ["eggs", "bacon"];
 var ingredientString = "";
 
 var app = express();
+for (var i = 0; i < ingredients.length - 1; i++) {
+    ingredientString += ingredients[i] + "%2C";
+}
+ingredientString += ingredients[ingredients.length - 1];
 
 
 // view engine setup
@@ -41,7 +46,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/food', routes);
+app.use('/food', foodPage);
+
+
 
 /**
  * POST callback for the file upload form. This is where the magic happens.
@@ -59,48 +67,6 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
      */
     async.waterfall(
         [
-            function (callback) {
-
-                /**
-                 * Check the mimetype to ensure the uploaded file is an image
-                 */
-                if (!_.contains(
-                        [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif'
-                        ],
-                        req.file.mimetype
-                    )) {
-
-                    return callback(new Error('Invalid file - please upload an image (.jpg, .png, .gif).'))
-
-                }
-
-                return callback();
-
-            },
-            function (callback) {
-
-                /**
-                 * Get some information about the uploaded file
-                 */
-                easyimg.info(src).then(
-                    function (file) {
-
-                        /**
-                         * Check that the image is suitably large
-                         */
-                        if (( file.width < 960 ) || ( file.height < 300 )) {
-
-                            return callback(new Error('Image must be at least 640 x 300 pixels'));
-
-                        }
-
-                        return callback();
-                    }
-                );
-            },
             function (callback) {
 
                 /**
@@ -166,7 +132,10 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
 
         }
     );
-
+    for(var i =0; i < ingredients.length-1;i++){
+        ingredientString += ingredients[i] + "%2C";
+    }
+    ingredientString += ingredients[ingredients.length-1];
 });
 
 app.post('/search', function (req, res, next) {
@@ -179,6 +148,7 @@ app.post('/search', function (req, res, next) {
         });
 
 });
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
