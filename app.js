@@ -16,6 +16,7 @@ var cv = require('opencv');
 var unirest = require('unirest');
 var routes = require('./routes/index');
 var food = require('./routes/food');
+var eat = require('./routes/eat');
 var math = require('math');
 var Quagga = require('quagga').default;
 var exts = {
@@ -24,8 +25,9 @@ var exts = {
     'image/gif': '.gif'
 }
 var searches;
-var ingredients = ["eggs", "bacon"];
+var ingredients = ["tomato", "pasta"];
 var ingredientString = "";
+var id = "";
 
 var app = express();
 for (var i = 0; i < ingredients.length - 1; i++) {
@@ -39,8 +41,8 @@ app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', 'hbs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-app.use(logger('dev'));
+//
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -51,6 +53,10 @@ app.post('/food', function (req, res, next) {
     //console.log("got here1");
     next();
 }, food);
+app.post('/eat', function (req, res, next) {
+    //console.log("got here1");
+    next();
+}, eat);
 app.use('/food', function (req, res, next) {
     //console.log("got here2");
     next();
@@ -112,11 +118,21 @@ app.post('/search', function (req, res, next) {
         .header("X-Mashape-Key", "NZwFn2gKm6mshqVHiXXfRc2AoJJap1I2xgHjsnikxAkrQRHJZR")
         .header("Accept", "application/json")
         .end(function (result) {
-            searches = result.body[math.floor(math.random() * result.body.length)].title;
-            console.log(searches);
-        });
 
-});
+            var temp = math.floor(math.random() * result.body.length);
+            searches = result.body[temp].title;
+            id = result.body[temp].id;
+            // print title
+            console.log("Recipe Title:" + searches);
+            console.log("\n");
+        });
+    unirest.get("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/" + id + "/summary")
+        .header("X-Mashape-Key", "NZwFn2gKm6mshqVHiXXfRc2AoJJap1I2xgHjsnikxAkrQRHJZR")
+        .end(function (result) {
+            console.log(result.body.summary);
+            console.log("\n");
+        });
+}, eat);
 
 
 // catch 404 and forward to error handler
@@ -130,15 +146,15 @@ app.use(function (req, res, next) {
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use(function (err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// if (app.get('env') === 'development') {
+//     app.use(function (err, req, res, next) {
+//         res.status(err.status || 500);
+//         res.render('error', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
 
 // production error handler
 // no stacktraces leaked to user

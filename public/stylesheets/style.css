@@ -67,4 +67,21 @@ a {
     border-radius: 15%;
     box-shadow: 0 0 3px gray;
     font-size:20px;
-    font-weight:bold;}
+    font-weight:bold;
+}
+
+.button-three {
+    position : absolute;
+    background: #aaff00;
+    width    : 200px;
+    height   : 100px;
+    left     : 50%;
+    top      : 50%;
+    margin-left : -150px; /*half of the width  */
+    margin-top  : 200px; /* half of the height */
+    color: #ffffff;
+    border-radius: 15%;
+    box-shadow: 0 0 3px gray;
+    font-size:20px;
+    font-weight:bold;
+}
