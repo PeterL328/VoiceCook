@@ -1,4 +1,4 @@
-## VoiceCook
+# VoiceCook
 
 
 <div style="text-align:center">
@@ -15,7 +15,7 @@
 <a href="http://devpost.com/software/voice-cook">Devpost Link</a></br>
 
 ## Try it out!
-<a href="http://www.voicecook.com/"><h2>Voicecook</h2></a></br>
+<a href="http://www.voicecook.com/"><h3>Voicecook</h3></a></br>
 ##Inspiration
 
 We're a team of engineering students, but more importantly, we're broke and always looking for ways to save time and money. We definitely don't have time to prepare and cook our own meals. This app was born from a desire to save money by cooking our own food, while not having to fret about how to cook it, with a chance that it might actually taste good.
